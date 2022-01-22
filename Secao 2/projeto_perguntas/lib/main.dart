@@ -5,17 +5,20 @@ main() {
   runApp(PerguntaApp());
 }
 
-class PerguntaApp extends StatelessWidget {
+class PerguntaAppState extends State<PerguntaApp> {
+  var perguntaSelecionada = 0;
   void responder() {
-    print('Pergunta Respondida!');
+    setState(() {
+      if (perguntaSelecionada == 1) {
+        perguntaSelecionada = 0;
+      } else {
+        perguntaSelecionada++;
+      }
+    });
+    print(perguntaSelecionada);
   }
 
-  void Function() funcaoQueRetornaUmaOutraFuncao() {
-    return () {
-      print('Pergunta Respondida #03!');
-    };
-  }
-
+  @override
   Widget build(BuildContext context) {
     final List<String> perguntas = [
       'Qual é sua cor favorita?',
@@ -28,19 +31,19 @@ class PerguntaApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text(perguntas[0]),
+            Text(perguntas[perguntaSelecionada]),
             ElevatedButton(onPressed: responder, child: Text('Reposta 1')),
-            ElevatedButton(
-                onPressed: () {
-                  print('Resposta 2 foi selecionada!');
-                },
-                child: Text('Reposta 2')),
-            ElevatedButton(
-                onPressed: funcaoQueRetornaUmaOutraFuncao(),
-                child: Text('Reposta 3'))
+            ElevatedButton(onPressed: responder, child: Text('Reposta 2')),
+            ElevatedButton(onPressed: responder, child: Text('Reposta 3'))
           ],
         ),
       ),
     );
+  }
+}
+
+class PerguntaApp extends StatefulWidget {
+  PerguntaAppState createState() {
+    return PerguntaAppState();
   }
 }
