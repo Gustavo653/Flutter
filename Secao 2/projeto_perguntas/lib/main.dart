@@ -1,40 +1,45 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import './questao.dart';
 
-main() {
-  runApp(PerguntaApp());
-}
+main() => runApp(new PerguntaApp());
 
-class PerguntaAppState extends State<PerguntaApp> {
-  var perguntaSelecionada = 0;
-  void responder() {
+class _PerguntaAppState extends State<PerguntaApp> {
+  var _perguntaSelecionada = 0;
+
+  void _responder() {
     setState(() {
-      if (perguntaSelecionada == 1) {
-        perguntaSelecionada = 0;
-      } else {
-        perguntaSelecionada++;
-      }
+      _perguntaSelecionada++;
+      print(_perguntaSelecionada);
     });
-    print(perguntaSelecionada);
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<String> perguntas = [
-      'Qual é sua cor favorita?',
-      'Qual é seu animal favorito?'
+    final perguntas = [
+      'Qual é a sua cor favorita?',
+      'Qual é o seu animal favorito?',
     ];
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Perguntas'),
         ),
         body: Column(
-          children: [
-            Text(perguntas[perguntaSelecionada]),
-            ElevatedButton(onPressed: responder, child: Text('Reposta 1')),
-            ElevatedButton(onPressed: responder, child: Text('Reposta 2')),
-            ElevatedButton(onPressed: responder, child: Text('Reposta 3'))
+          children: <Widget>[
+            Questao(perguntas[_perguntaSelecionada]),
+            ElevatedButton(
+              child: Text('Resposta 1'),
+              onPressed: _responder,
+            ),
+            ElevatedButton(
+              child: Text('Resposta 2'),
+              onPressed: _responder,
+            ),
+            ElevatedButton(
+              child: Text('Resposta 3'),
+              onPressed: _responder,
+            ),
           ],
         ),
       ),
@@ -43,7 +48,7 @@ class PerguntaAppState extends State<PerguntaApp> {
 }
 
 class PerguntaApp extends StatefulWidget {
-  PerguntaAppState createState() {
-    return PerguntaAppState();
+  _PerguntaAppState createState() {
+    return _PerguntaAppState();
   }
 }
