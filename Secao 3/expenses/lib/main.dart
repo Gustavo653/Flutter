@@ -22,7 +22,7 @@ class MyHomePage extends StatelessWidget {
     Transaction(
       id: 't2',
       title: 'Conta de Luz',
-      value: 211.36,
+      value: 211.3,
       date: DateTime.now(),
     ),
   ];
@@ -48,7 +48,49 @@ class MyHomePage extends StatelessWidget {
           Column(
             children: _transactions
                 .map((e) => Card(
-                      child: Text(e.title),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.purple,
+                                width: 2,
+                              ),
+                            ),
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              'R\$ ' + e.value.toStringAsFixed(2),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.purple,
+                              ),
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                e.title,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                e.date.toString(),
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ))
                 .toList(),
           )
