@@ -6,7 +6,7 @@ class TransactionForm extends StatefulWidget {
   TransactionForm(this.onSubmit);
 
   @override
-  State<TransactionForm> createState() => _TransactionFormState();
+  _TransactionFormState createState() => _TransactionFormState();
 }
 
 class _TransactionFormState extends State<TransactionForm> {
